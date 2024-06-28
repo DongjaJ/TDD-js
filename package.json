@@ -1,0 +1,22 @@
+{
+  "name": "tdd-js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/ui": "^1.6.0",
+    "eslint-plugin-vitest": "^0.5.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1",
+    "vitest": "^1.6.0"
+  }
+}
