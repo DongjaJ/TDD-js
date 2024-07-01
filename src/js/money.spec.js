@@ -25,6 +25,9 @@ describe("money Test", () => {
     it("dallar 5 === dallar 5", () => {
       expect(new Dallor(5).equals(new Dallor(5))).toBeTruthy();
     });
+    it("dallar 5 !== dallar 6", () => {
+      expect(new Dallor(5).equals(new Dallor(5))).toBeFalsy();
+    });
   });
 
   it.todo("hashCode() ?");
