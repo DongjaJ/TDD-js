@@ -31,4 +31,8 @@ describe("money Test", () => {
   });
 
   it.todo("hashCode() ?");
+
+  it.todo("equal null() ?");
+
+  it.todo("equal object() ?");
 });
