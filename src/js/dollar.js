@@ -1,7 +1,11 @@
 export default class Dallor {
   amount;
 
-  constructor(amount) {}
+  constructor(amount) {
+    this.amount = amount;
+  }
 
-  times(multiplier) {}
+  times(multiplier) {
+    this.amount = this.amount * multiplier;
+  }
 }
