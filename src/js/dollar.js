@@ -6,8 +6,7 @@ export default class Dallor {
   }
 
   times(multiplier) {
-    this.amount = this.amount * multiplier;
-    return null;
+    return new Dallor(this.amount * multiplier);
   }
 
   equals(object) {
