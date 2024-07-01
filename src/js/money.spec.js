@@ -16,7 +16,7 @@ describe("money Test", () => {
     five.times(2);
     expect(five.amount).toBe(10);
     five.times(3);
-    expect(five.amount).toBe(10);
+    expect(five.amount).toBe(15);
   });
 
   it.todo("money 반올림");
