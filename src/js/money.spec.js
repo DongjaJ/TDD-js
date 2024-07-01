@@ -23,7 +23,7 @@ describe("money Test", () => {
 
   describe("equals() ?", () => {
     it("dallar 5 === dallar 5", () => {
-      expect(new Dallor(5).equals(new Dallor(5))).toBe();
+      expect(new Dallor(5).equals(new Dallor(5))).toBeTruthy();
     });
   });
 

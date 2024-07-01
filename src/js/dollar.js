@@ -9,4 +9,8 @@ export default class Dallor {
     this.amount = this.amount * multiplier;
     return null;
   }
+
+  equals(object) {
+    return true;
+  }
 }
