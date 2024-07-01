@@ -21,7 +21,11 @@ describe("money Test", () => {
 
   it.todo("money 반올림");
 
-  it.todo("equals() ?");
+  describe("equals() ?", () => {
+    it("dallar 5 === dallar 5", () => {
+      expect(new Dallor(5).equals(new Dallor(5))).toBe();
+    });
+  });
 
   it.todo("hashCode() ?");
 });
