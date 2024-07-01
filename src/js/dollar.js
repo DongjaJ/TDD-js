@@ -1,15 +1,15 @@
 export default class Dallor {
-  amount;
+  #amount;
 
   constructor(amount) {
-    this.amount = amount;
+    this.#amount = amount;
   }
 
   times(multiplier) {
-    return new Dallor(this.amount * multiplier);
+    return new Dallor(this.#amount * multiplier);
   }
 
   equals(object) {
-    return this.amount === object.amount;
+    return this.#amount === object.#amount;
   }
 }
