@@ -26,7 +26,7 @@ describe("money Test", () => {
       expect(new Dallor(5).equals(new Dallor(5))).toBeTruthy();
     });
     it("dallar 5 !== dallar 6", () => {
-      expect(new Dallor(5).equals(new Dallor(5))).toBeFalsy();
+      expect(new Dallor(5).equals(new Dallor(6))).toBeFalsy();
     });
   });
 
