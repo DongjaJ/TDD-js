@@ -11,6 +11,13 @@ describe("money Test", () => {
   });
 
   it.todo("amount를 private로 만들기");
-  it.todo("dollar 부작용");
+  it("dollar 부작용 : 연산을 수행한 후에 dollar의 값이 바뀌지 않는다", () => {
+    const five = new Dallor(5);
+    five.times(2);
+    expect(five.amount).toBe(10);
+    five.times(3);
+    expect(five.amount).toBe(10);
+  });
+
   it.todo("money 반올림");
 });
