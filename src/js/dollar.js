@@ -11,6 +11,6 @@ export default class Dallor {
   }
 
   equals(object) {
-    return true;
+    return this.amount === object.amount;
   }
 }
