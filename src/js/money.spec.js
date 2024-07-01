@@ -20,4 +20,8 @@ describe("money Test", () => {
   });
 
   it.todo("money 반올림");
+
+  it.todo("equals() ?");
+
+  it.todo("hashCode() ?");
 });
