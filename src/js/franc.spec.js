@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import Franc from "./franc.js";
+import { Franc } from "./money.js";
 
 describe("Franc Test", () => {
   it("5HCF * 2 = 10HCF", () => {
