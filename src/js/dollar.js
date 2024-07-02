@@ -1,15 +1,12 @@
-export default class Dallor {
-  #amount;
+import { Money } from "./money.js";
 
+export default class Dallor extends Money {
   constructor(amount) {
-    this.#amount = amount;
+    super();
+    this._amount = amount;
   }
 
   times(multiplier) {
-    return new Dallor(this.#amount * multiplier);
-  }
-
-  equals(object) {
-    return this.#amount === object.#amount;
+    return new Dallor(this._amount * multiplier);
   }
 }
