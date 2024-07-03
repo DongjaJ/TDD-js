@@ -8,8 +8,10 @@ export class Money {
   }
 
   equals(object) {
-    const dollar = object;
-    return this._amount === dollar._amount;
+    const money = object;
+    return (
+      this._amount === money._amount && this.currency() === money.currency()
+    );
   }
 
   static dollar(amount) {
@@ -23,16 +25,16 @@ export class Money {
   currency() {
     return this._currency;
   }
-}
 
-export class Dollar extends Money {
+  toString() {
+    return this._amount + " " + this._currency;
+  }
+
   times(multiplier) {
-    return Money.dollar(this._amount * multiplier);
+    return new Money(this._amount * multiplier, this._currency);
   }
 }
 
-export class Franc extends Money {
-  times(multiplier) {
-    return Money.franc(this._amount * multiplier);
-  }
-}
+export class Dollar extends Money {}
+
+export class Franc extends Money {}

@@ -1,4 +1,5 @@
-import { Money } from "./money.js";
+import { expect } from "vitest";
+import { Franc, Money } from "./money.js";
 
 describe("Franc Test", () => {
   it("Money 팩토리 함수", () => {
@@ -11,5 +12,9 @@ describe("Franc Test", () => {
   it("currency test", () => {
     expect(Money.dollar(5).currency()).toBe("USD");
     expect(Money.franc(1).currency()).toBe("CHF");
+  });
+
+  it("다른 class끼리 equality 테스트", () => {
+    expect(new Money(10, "CHF")).toEqual(new Franc(10, "CHF"));
   });
 });
