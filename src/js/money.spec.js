@@ -1,7 +1,7 @@
 import { expect } from "vitest";
-import { Franc, Money } from "./money.js";
+import { Money } from "./money.js";
 
-describe("Franc Test", () => {
+describe("Money Test", () => {
   it("Money 팩토리 함수", () => {
     const five = Money.dollar(5);
 
@@ -9,12 +9,17 @@ describe("Franc Test", () => {
     expect(five.times(3)).toEqual(Money.dollar(15));
   });
 
-  it("currency test", () => {
-    expect(Money.dollar(5).currency()).toBe("USD");
-    expect(Money.franc(1).currency()).toBe("CHF");
-  });
+  describe("equality Test", () => {
+    it("같은 값을 넣은 dallor 팩토리함수 테스트 ", () => {
+      expect(Money.dollar(5).equals(Money.dollar(5))).toBeTruthy();
+    });
 
-  it("다른 class끼리 equality 테스트", () => {
-    expect(new Money(10, "CHF")).toEqual(new Franc(10, "CHF"));
+    it("다른 값을 넣은 dallor 팩토리함수 테스트 ", () => {
+      expect(Money.dollar(5).equals(Money.dollar(6))).toBeFalsy();
+    });
+
+    it("같은 값을 넣은 dallor, franc 팩토리함수 테스트 ", () => {
+      expect(Money.dollar(5).equals(Money.franc(5))).toBeFalsy();
+    });
   });
 });

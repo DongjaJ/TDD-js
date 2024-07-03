@@ -15,11 +15,11 @@ export class Money {
   }
 
   static dollar(amount) {
-    return new Dollar(amount, "USD");
+    return new Money(amount, "USD");
   }
 
   static franc(amount) {
-    return new Franc(amount, "CHF");
+    return new Money(amount, "CHF");
   }
 
   currency() {
@@ -34,7 +34,3 @@ export class Money {
     return new Money(this._amount * multiplier, this._currency);
   }
 }
-
-export class Dollar extends Money {}
-
-export class Franc extends Money {}
