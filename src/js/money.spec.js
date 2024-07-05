@@ -38,4 +38,16 @@ describe("Money Test", () => {
     const reduced = bank.reduce(Money.dollar(1), "USD");
     expect(reduced).toEqual(Money.dollar(1));
   });
+
+  it("Money에 대한 통화 변환을 수행하는 reduce 동작 테스트", () => {
+    const bank = new Bank();
+    bank.addRate("CHF", "USD", 2);
+    const result = bank.reduce(Money.franc(2), "USD");
+    expect(result).toEqual(Money.dollar(1));
+  });
+
+  it("USD에서 USD로의 환율은 1 테스트", () => {
+    const result = new Bank().rate("USD", "USD");
+    expect(result).toEqual(1);
+  });
 });

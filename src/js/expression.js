@@ -14,7 +14,7 @@ export class Sum extends Expression {
     this.addend = addend;
   }
 
-  reduce(to) {
+  reduce(bank, to) {
     const amount = this.augend._amount + this.addend._amount;
     return new Money(amount, to);
   }
