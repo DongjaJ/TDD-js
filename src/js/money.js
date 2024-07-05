@@ -1,4 +1,4 @@
-import { Expression } from "./expression";
+import { Expression, Sum } from "./expression";
 
 export class Money extends Expression {
   _amount;
@@ -38,6 +38,10 @@ export class Money extends Expression {
   }
 
   plus(addend) {
-    return new Money(this._amount + addend._amount, this._currency);
+    return new Sum(this, addend);
+  }
+
+  reduce(to) {
+    return this;
   }
 }

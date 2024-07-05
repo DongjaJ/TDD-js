@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { Money } from "./money.js";
 import { Bank } from "./bank.js";
+import { Sum } from "./expression.js";
 
 describe("Money Test", () => {
   it("Money 팩토리 함수", () => {
@@ -25,11 +26,16 @@ describe("Money Test", () => {
   });
 
   it("간단한 달러 덧셈 테스트", () => {
-    const five = Money.dollar(5);
-    const sum = five.plus(Money.dollar(5));
+    const sum = new Sum(Money.dollar(5), Money.dollar(5));
 
     const bank = new Bank();
     const reduced = bank.reduce(sum, "USD");
     expect(reduced).toEqual(Money.dollar(10));
+  });
+
+  it("Bank.reduce()의 인자로 Money를 넘겼을 경우 동작 테스트", () => {
+    const bank = new Bank();
+    const reduced = bank.reduce(Money.dollar(1), "USD");
+    expect(reduced).toEqual(Money.dollar(1));
   });
 });
