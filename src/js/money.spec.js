@@ -50,4 +50,15 @@ describe("Money Test", () => {
     const result = new Bank().rate("USD", "USD");
     expect(result).toEqual(1);
   });
+
+  it("다른 통화들간의 덧셈", () => {
+    const fiveBucks = Money.dollar(5);
+    const tenFranc = Money.franc(10);
+    const bank = new Bank();
+    bank.addRate("CHF", "USD", 2);
+
+    const result = bank.reduce(fiveBucks.plus(tenFranc), "USD");
+
+    expect(result).toEqual(Money.dollar(10));
+  });
 });
