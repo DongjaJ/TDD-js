@@ -1,5 +1,5 @@
 export class Money {
-  constructor(protected amount: number) {}
+  constructor(protected amount: number, protected _currency: string) {}
 
   equals(object: object) {
     const money = object as Money;
@@ -7,22 +7,42 @@ export class Money {
   }
 
   static dollar(amount: number) {
-    return new Dollar(amount);
+    return new Dollar(amount, "USD");
   }
 
   static franc(amount: number) {
-    return new Franc(amount);
+    return new Franc(amount, "CHF");
+  }
+
+  currency(): string {
+    return "";
   }
 }
 
 export class Dollar extends Money {
+  constructor(amount: number, _currency: string) {
+    super(amount, _currency);
+  }
+
   times(multiplier: number) {
-    return new Dollar(this.amount * multiplier);
+    return Money.dollar(this.amount * multiplier);
+  }
+
+  override currency(): string {
+    return this._currency;
   }
 }
 
 export class Franc extends Money {
+  constructor(amount: number, _currency: string) {
+    super(amount, _currency);
+  }
+
   times(multiplier: number) {
-    return new Franc(this.amount * multiplier);
+    return Money.franc(this.amount * multiplier);
+  }
+
+  override currency(): string {
+    return this._currency;
   }
 }
