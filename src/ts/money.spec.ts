@@ -32,13 +32,6 @@ describe("money test", () => {
     expect(reduced).toEqual(Money.dollar(10));
   });
 
-  it("plus는 sum을 return해야 한다", () => {
-    const five = Money.dollar(5);
-    const sum = five.plus(five);
-    expect(sum.augend).toEqual(Money.dollar(5));
-    expect(sum.addend).toEqual(Money.dollar(5));
-  });
-
   it("reduce sum 테스트", () => {
     const sum = new Sum(Money.dollar(3), Money.dollar(4));
     const bank = new Bank();
@@ -71,5 +64,16 @@ describe("money test", () => {
 
     const result = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
     expect(result).toEqual(Money.dollar(10));
+  });
+  it("Expression times 함수 테스트", () => {
+    const fiveBucks = Money.dollar(5);
+    const tenFrancs = Money.franc(10);
+    const bank = new Bank();
+    bank.addRate("CHF", "USD", 2);
+
+    const sum = new Sum(fiveBucks, tenFrancs).times(2);
+
+    const result = bank.reduce(sum, "USD");
+    expect(result).toEqual(Money.dollar(20));
   });
 });
