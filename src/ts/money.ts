@@ -23,11 +23,11 @@ export class Money implements Expression {
     return this._currency;
   }
 
-  times(multiplier: number) {
+  times(multiplier: number): Expression {
     return new Money(this.amount * multiplier, this._currency);
   }
 
-  plus(addend: Money) {
+  plus(addend: Expression): Expression {
     return new Sum(this, addend);
   }
 

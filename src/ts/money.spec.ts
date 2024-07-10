@@ -62,4 +62,14 @@ describe("money test", () => {
   it("같은 currency일때 환율은 1이다", () => {
     expect(new Bank().rate("USD", "USD")).toBe(1);
   });
+
+  it("달러, 프랑 섞어서 더하기", () => {
+    const fiveBucks = Money.dollar(5);
+    const tenFrancs = Money.franc(10);
+    const bank = new Bank();
+    bank.addRate("CHF", "USD", 2);
+
+    const result = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
+    expect(result).toEqual(Money.dollar(10));
+  });
 });
