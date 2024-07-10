@@ -1,4 +1,5 @@
 import { Bank } from "./bank";
+import { Sum } from "./expression";
 import { Money } from "./money";
 
 describe("money test", () => {
@@ -29,5 +30,25 @@ describe("money test", () => {
     const reduced = bank.reduce(sum, "USD");
 
     expect(reduced).toEqual(Money.dollar(10));
+  });
+
+  it("plus는 sum을 return해야 한다", () => {
+    const five = Money.dollar(5);
+    const sum = five.plus(five);
+    expect(sum.augend).toEqual(Money.dollar(5));
+    expect(sum.addend).toEqual(Money.dollar(5));
+  });
+
+  it("reduce sum 테스트", () => {
+    const sum = new Sum(Money.dollar(3), Money.dollar(4));
+    const bank = new Bank();
+    const result = bank.reduce(sum, "USD");
+    expect(result).toEqual(Money.dollar(7));
+  });
+
+  it("bank reduce함수로 money 객체를 넘겼을 때 테스트", () => {
+    const bank = new Bank();
+    const result = bank.reduce(Money.dollar(1), "USD");
+    expect(result).toEqual(Money.dollar(1));
   });
 });
