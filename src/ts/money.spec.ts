@@ -51,4 +51,15 @@ describe("money test", () => {
     const result = bank.reduce(Money.dollar(1), "USD");
     expect(result).toEqual(Money.dollar(1));
   });
+
+  it("currency가 다른 money간 reduce 테스트", () => {
+    const bank = new Bank();
+    bank.addRate("CHF", "USD", 2);
+    const result = bank.reduce(Money.franc(2), "USD");
+    expect(result).toEqual(Money.dollar(1));
+  });
+
+  it("같은 currency일때 환율은 1이다", () => {
+    expect(new Bank().rate("USD", "USD")).toBe(1);
+  });
 });
