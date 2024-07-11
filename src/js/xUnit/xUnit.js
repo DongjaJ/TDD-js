@@ -6,30 +6,46 @@ class TestCase {
   }
 
   run() {
+    this.setUp();
     this[this.functionName]();
   }
+
+  setUp() {}
 }
 
 class WasRun extends TestCase {
   wasRun;
+  wasSetUp;
 
   constructor(functionName) {
     super(functionName);
-    this.wasRun = false;
   }
 
   testMethod() {
     this.wasRun = true;
   }
+
+  setUp() {
+    this.wasRun = false;
+    this.wasSetUp = true;
+  }
 }
 
 class TestCaseTest extends TestCase {
+  setUp() {
+    this.test = new WasRun("testMethod");
+  }
+
   testRunning() {
-    const test = new WasRun("testMethod");
-    assert(!test.wasRun);
-    test.run();
-    assert(test.wasRun);
+    this.test.run();
+    assert(this.test.wasRun);
+  }
+
+  testSetUp() {
+    this.test.run();
+    assert(this.test.wasSetUp);
   }
 }
 
 new TestCaseTest("testRunning").run();
+new TestCaseTest("testSetUp").run();
