@@ -6,11 +6,17 @@ class TestCase {
   }
 
   run() {
+    const result = new TestResult();
+    result.testStarted();
     this.setUp();
     this[this.functionName]();
+    this.tearDown();
+    return result;
   }
 
   setUp() {}
+
+  tearDown() {}
 }
 
 class WasRun extends TestCase {
@@ -23,11 +29,21 @@ class WasRun extends TestCase {
 
   testMethod() {
     this.wasRun = true;
+    this.log = [this.log, "testMethod"].join(" ");
   }
 
   setUp() {
     this.wasRun = false;
     this.wasSetUp = true;
+    this.log = "setup";
+  }
+
+  tearDown() {
+    this.log = [this.log, "tearDown"].join(" ");
+  }
+
+  testBrokenMethod() {
+    throw new Error();
   }
 }
 
@@ -36,16 +52,42 @@ class TestCaseTest extends TestCase {
     this.test = new WasRun("testMethod");
   }
 
-  testRunning() {
-    this.test.run();
-    assert(this.test.wasRun);
-  }
-
   testSetUp() {
     this.test.run();
-    assert(this.test.wasSetUp);
+    assert.equal(this.test.log, "setup testMethod");
+  }
+
+  testTemplateMethod() {
+    const test = new WasRun("testMethod");
+    test.run();
+    assert.equal("setUp testMethod tearDown", test.log);
+  }
+
+  testResult() {
+    const test = new WasRun("testMethod");
+    const result = test.run();
+    assert.equal(result.summary(), "1 run, 0 failed");
+  }
+
+  testFailedResult() {
+    const test = new WasRun("testBrokenMethod");
+    const result = test.run();
+    assert.equal(result.summary(), "1 run, 1 failed");
   }
 }
 
-new TestCaseTest("testRunning").run();
-new TestCaseTest("testSetUp").run();
+class TestResult {
+  constructor() {
+    this.runCount = 0;
+  }
+
+  testStarted() {
+    this.runCount = this.runCount + 1;
+  }
+
+  summary() {
+    return `${this.runCount} run, 0 failed`;
+  }
+}
+
+new TestCaseTest("testResult").run();
