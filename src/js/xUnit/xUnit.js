@@ -1,5 +1,14 @@
 import assert from "assert";
 
+/**
+ * TODO
+ *
+ * 1. setUp에서 발생한 에러 찾아서 보고하기
+ * 2. TestCase 클래스에서 TestSuite 생성하기
+ * 3. 테스트 메서드가 실패하더라도 tearDown 호출하기
+ *
+ * */
+
 class TestCase {
   constructor(functionName) {
     this.functionName = functionName;
