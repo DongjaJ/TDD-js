@@ -9,7 +9,13 @@ class TestCase {
     const result = new TestResult();
     result.testStarted();
     this.setUp();
-    this[this.functionName]();
+
+    try {
+      this[this.functionName]();
+    } catch (error) {
+      result.testFailed();
+    }
+
     this.tearDown();
     return result;
   }
@@ -22,10 +28,6 @@ class TestCase {
 class WasRun extends TestCase {
   wasRun;
   wasSetUp;
-
-  constructor(functionName) {
-    super(functionName);
-  }
 
   testMethod() {
     this.wasRun = true;
@@ -74,11 +76,19 @@ class TestCaseTest extends TestCase {
     const result = test.run();
     assert.equal(result.summary(), "1 run, 1 failed");
   }
+
+  testFailedResultFormatting() {
+    const result = new TestResult();
+    result.testStarted();
+    result.testFailed();
+    assert.equal("1 run, 1 failed", result.summary());
+  }
 }
 
 class TestResult {
   constructor() {
     this.runCount = 0;
+    this.failureCount = 0;
   }
 
   testStarted() {
@@ -86,8 +96,12 @@ class TestResult {
   }
 
   summary() {
-    return `${this.runCount} run, 0 failed`;
+    return `${this.runCount} run, ${this.failureCount} failed`;
+  }
+
+  testFailed() {
+    this.failureCount = this.failureCount + 1;
   }
 }
 
-new TestCaseTest("testResult").run();
+new TestCaseTest("testFailedResultFormatting").run();
