@@ -48,39 +48,38 @@ class WasRun extends TestCase {
 }
 
 class TestCaseTest extends TestCase {
+  setUp() {
+    this.result = new TestResult();
+  }
+
   testSetUp() {
     const test = new WasRun("testSetUp");
-    const result = new TestResult();
-    test.run(result);
+    test.run(this.result);
     assert.equal(test.log, "setup testMethod");
   }
 
   testTemplateMethod() {
     const test = new WasRun("testMethod");
-    const result = new TestResult();
-    test.run(result);
+    test.run(this.result);
     assert.equal("setup testMethod tearDown", test.log);
   }
 
   testResult() {
     const test = new WasRun("testMethod");
-    const result = new TestResult();
-    test.run(result);
-    assert.equal(result.summary(), "1 run, 0 failed");
+    test.run(this.result);
+    assert.equal(this.result.summary(), "1 run, 0 failed");
   }
 
   testFailedResult() {
     const test = new WasRun("testBrokenMethod");
-    const result = new TestResult();
-    test.run(result);
-    assert.equal(result.summary(), "1 run, 1 failed");
+    test.run(this.result);
+    assert.equal(this.result.summary(), "1 run, 1 failed");
   }
 
   testFailedResultFormatting() {
-    const result = new TestResult();
-    result.testStarted();
-    result.testFailed();
-    assert.equal("1 run, 1 failed", result.summary());
+    this.result.testStarted();
+    this.result.testFailed();
+    assert.equal("1 run, 1 failed", this.result.summary());
   }
 
   testSuite() {
@@ -88,11 +87,9 @@ class TestCaseTest extends TestCase {
     suite.add(new WasRun("testMethod"));
     suite.add(new WasRun("testBrokenMethod"));
 
-    const result = new TestResult();
+    suite.run(this.result);
 
-    suite.run(result);
-
-    assert.equal(result.summary(), "2 run, 1 failed");
+    assert.equal(this.result.summary(), "2 run, 1 failed");
   }
 }
 
