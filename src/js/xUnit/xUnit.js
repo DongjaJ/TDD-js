@@ -104,4 +104,7 @@ class TestResult {
   }
 }
 
-new TestCaseTest("testFailedResultFormatting").run();
+new TestCaseTest("testTemplateMethod").run().summary();
+new TestCaseTest("testResult").run().summary();
+new TestCaseTest("testFailedResultFormatting").run().summary();
+new TestCaseTest("testFailedResult").run().summary();
